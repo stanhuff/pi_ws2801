@@ -30,9 +30,9 @@ void shiftRgb(int color) {
 		digitalWrite(DataPin, (color & 0x800000) ? HIGH : LOW);
 		clockDelay();
 		digitalWrite(ClockPin, HIGH);
-		delayMicroseconds(1);
+		delayMicroseconds(10);
 		digitalWrite(ClockPin, LOW);
-		delayMicroseconds(1);
+		delayMicroseconds(10);
 		color <<= 1;	// shift it upward 1 bit
 	}
 	
@@ -55,38 +55,40 @@ int main(void) {
 
 	setAll(0, LightCount);
 
-	int i;
-	for (i = 0; i < 256; ++i) {
-		setAll(i << 16, LightCount);
-		delay(15);	// about 60fps
+	int j = 100;
+	while (--j >= 0) {
+		int i;
+		for (i = 0; i < 256; ++i) {
+			setAll(i << 16, LightCount);
+			delay(15);	// about 60fps
+		}
+	
+		for (i = 254; i >= 0; --i) {
+			setAll(i << 16, LightCount);
+			delay(15);	// about 60fps
+		}
+	
+	
+		for (i = 0; i < 256; ++i) {
+			setAll(i << 8, LightCount);
+			delay(15);	// about 60fps
+		}
+	
+		for (i = 254; i >= 0; --i) {
+			setAll(i << 8, LightCount);
+			delay(15);	// about 60fps
+		}
+	
+		for (i = 0; i < 256; ++i) {
+			setAll(i, LightCount);
+			delay(15);	// about 60fps
+		}
+	
+		for (i = 254; i >= 0; --i) {
+			setAll(i, LightCount);
+			delay(15);	// about 60fps
+		}
 	}
-
-	for (i = 254; i >= 0; --i) {
-		setAll(i << 16, LightCount);
-		delay(15);	// about 60fps
-	}
-
-
-	for (i = 0; i < 256; ++i) {
-		setAll(i << 8, LightCount);
-		delay(15);	// about 60fps
-	}
-
-	for (i = 254; i >= 0; --i) {
-		setAll(i << 8, LightCount);
-		delay(15);	// about 60fps
-	}
-
-	for (i = 0; i < 256; ++i) {
-		setAll(i, LightCount);
-		delay(15);	// about 60fps
-	}
-
-	for (i = 254; i >= 0; --i) {
-		setAll(i, LightCount);
-		delay(15);	// about 60fps
-	}
-
 
 	setAll(0, LightCount);
 

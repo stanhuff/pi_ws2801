@@ -31,9 +31,9 @@ void shiftRgb(int color) {
 		digitalWrite(DataPin, (color & 0x800000) ? HIGH : LOW);
 		clockDelay();
 		digitalWrite(ClockPin, HIGH);
-		delayMicroseconds(1);
+		delayMicroseconds(10);
 		digitalWrite(ClockPin, LOW);
-		delayMicroseconds(1);
+		delayMicroseconds(10);
 		color <<= 1;	// shift it upward 1 bit
 	}
 	
